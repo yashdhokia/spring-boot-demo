@@ -14,7 +14,7 @@ public class AccountMapper {
      * @param accountDto
      * @return
      */
-    public static Account mapToAccount(AccountDto accountDto){
+    public static Account mapToAccount(AccountDto accountDto) {
         return new Account(
                 accountDto.getId(),
                 accountDto.getAccountHolderName(),
@@ -28,7 +28,7 @@ public class AccountMapper {
      * @param account
      * @return
      */
-    public static AccountDto mapToAccountDto(Account account){
+    public static AccountDto mapToAccountDto(Account account) {
         return new AccountDto(
                 account.getId(),
                 account.getAccountHolderName(),
