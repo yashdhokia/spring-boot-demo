@@ -11,16 +11,30 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Account Service Implementation
+ */
 @Service
 public class AccountServiceImpl implements AccountService {
 
     private AccountRepository accountRepository;
 
+    /**
+     * AccountServiceImpl constructor
+     *
+     * @param accountRepository
+     */
     @Autowired
     public AccountServiceImpl(AccountRepository accountRepository) {
         this.accountRepository = accountRepository;
     }
 
+    /**
+     * Create Account
+     *
+     * @param accountDto
+     * @return
+     */
     @Override
     public AccountDto createAccount(AccountDto accountDto) {
         Account account = AccountMapper.mapToAccount(accountDto);
@@ -28,6 +42,12 @@ public class AccountServiceImpl implements AccountService {
         return AccountMapper.mapToAccountDto(newAccount);
     }
 
+    /**
+     * Get by Account Id
+     *
+     * @param id
+     * @return AccountDto
+     */
     @Override
     public AccountDto getAccountById(Long id) {
         Account account = accountRepository
@@ -36,6 +56,13 @@ public class AccountServiceImpl implements AccountService {
         return AccountMapper.mapToAccountDto(account);
     }
 
+    /**
+     * Deposit balance in Account
+     *
+     * @param id
+     * @param amount
+     * @return AccountDto
+     */
     @Override
     public AccountDto deposit(Long id, double amount) {
         Account account = accountRepository
@@ -47,6 +74,13 @@ public class AccountServiceImpl implements AccountService {
         return AccountMapper.mapToAccountDto(updatedAccount);
     }
 
+    /**
+     * Withdraw balance from Account
+     *
+     * @param id
+     * @param amount
+     * @return AccountDto
+     */
     @Override
     public AccountDto withdraw(Long id, double amount) {
         Account account = accountRepository
@@ -60,11 +94,15 @@ public class AccountServiceImpl implements AccountService {
         return AccountMapper.mapToAccountDto(updatedAccount);
     }
 
+    /**
+     * Get all Accounts
+     *
+     * @return List<AccountDto>
+     */
     @Override
     public List<AccountDto> getAllAccounts() {
         List<Account> allAccounts = accountRepository.findAll();
         return allAccounts.stream().map(AccountMapper::mapToAccountDto).collect(Collectors.toList());
     }
-
 
 }
